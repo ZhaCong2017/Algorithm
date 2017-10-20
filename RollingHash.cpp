@@ -39,7 +39,7 @@ int rollinghash(string haystack, string needle)
 	for (int i = 1; i <= haystack.length() - n; i++)
 	{
 		hashhay = (hashhay - (haystack[i - 1] - ch) * multiple % max);
-		if (hashhay < 0)
+		while (hashhay < 0)
 			hashhay += max;
 		hashhay = (hashhay * factor + haystack[i + n - 1] - ch) % max;
 		if (hash == hashhay && verify(haystack, needle, i))
