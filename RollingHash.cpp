@@ -3,7 +3,7 @@
 #include<cmath>
 using namespace std;
 
-#define max 9191891
+#define max 163729
 #define factor 29
 #define ch 96
 
@@ -18,6 +18,20 @@ bool verify(string haystack, string needle, int x)
 	return true;
 }
 
+long long Pow(int n)
+{
+	long long result = 1;
+	long long f = factor;
+	while (n)
+	{
+		if (n & 1)
+			result = result * f % max;
+		f = f * f % max;
+		n >>= 1;
+	}
+	return result;
+}
+
 int rollinghash(string haystack, string needle)
 {
 	int n = needle.length();
@@ -26,7 +40,7 @@ int rollinghash(string haystack, string needle)
 		return 0;
 	if (m == 0 || m < n)
 		return -1;
-	long long multiple = long long(pow(factor, n - 1)) % max;
+	long long multiple = Pow(n - 1) % max;
 	long long hash = 0;
 	long long hashhay = 0;
 	for (int i = 0; i < n; i++)
