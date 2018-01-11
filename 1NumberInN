@@ -1,0 +1,47 @@
+#include<iostream>
+#include<ctime>
+#include<random>
+using namespace std;
+
+int getrandom()
+{
+	return (rand() % 10000) * 10000 + rand() % 10000;
+}
+
+int get1num1(int n)
+{
+	int result = 0;
+	while (n)
+	{
+		result += n & 1;
+		n >>= 1;
+	}
+	return result;
+}
+
+int get1num2(int n)
+{
+	int result = 0;
+	while (n)
+	{
+		result++;
+		n = n & (n - 1);
+	}
+	return result;
+}
+
+int main()
+{
+	int n = 10000;
+	srand(time(NULL));
+	for (int i = 1; i <= n; i++)
+	{
+		int num = getrandom();
+		if (get1num1(num) != get1num2(num))
+			cout << num << "wrong!" << endl;
+		if (i % 1000 == 0)
+			cout << i << "done!" << endl;
+	}
+	system("pause");
+	return 0;
+}
